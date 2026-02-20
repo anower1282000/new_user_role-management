@@ -8,7 +8,7 @@ class LoginResponse implements LoginResponseContract
 {
     public function toResponse($request)
     {
-        $role = $request->user()->role;
+        $role = auth()->user()->role;
 
         return match ($role) {
             'admin' => redirect()->intended('/admin/dashboard'),

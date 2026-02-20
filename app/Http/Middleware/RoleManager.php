@@ -15,11 +15,11 @@ class RoleManager
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-        if (!$request->user() || $request->user()->role !== $role) {
+        if (auth()->user()?->role !== $role) {
             
-            return redirect('/')->with('message','unauthorize access');
+           abort(403, 'Unauthorized access.');//permission denied
         }
 
-        return $next($request);
+        return $next($request); //permission granted
     }
-    }
+}
